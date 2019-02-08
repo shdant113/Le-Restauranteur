@@ -16,6 +16,6 @@
 
 #### Wireframes:
 
-|| https://puu.sh/CJjep/7e07cfb79f.png ||
-|| https://puu.sh/CJjeJ/71efadb8c9.png ||
-|| https://puu.sh/CJjeS/d43ad4fd0b.png ||
+https://puu.sh/CJjep/7e07cfb79f.png ||
+https://puu.sh/CJjeJ/71efadb8c9.png ||
+https://puu.sh/CJjeS/d43ad4fd0b.png ||
