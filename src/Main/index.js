@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import RandomRestaurantModal from '../ResultsModal'
 
 class Main extends React.Component {
 	constructor() {
@@ -6,6 +8,7 @@ class Main extends React.Component {
 		this.state = {
 			restaurants: [],
 			city: '',
+			show: false,
 			username: '',
 			loggedIn: true
 		}
@@ -23,11 +26,34 @@ class Main extends React.Component {
 		e.preventDefault()
 		try {
 			console.log(`submitting ${this.state.city}`)
+			// PROMISES
+			// fetch information from API
+				// method GET credentials include body stringify append headers
+			// check error
+			// json parse response
+			// set new state with restaurants array
+				// run function to display one random index out of restaurants array
+					// remove index of restaurant displayed from available indexes to display so that it does not get displayed again if they choose another random search
+				// display in modal? setstate
+					// reference wireframes --> map display with pin
+						// refer to lab?
+					// button to rerender modal with a new restaurant
+			this.showListModal();
 		} catch (err) {
 			console.log(err)
 			return err
 		}
-	} 
+	}
+	showListModal = () => {
+		this.setState({
+			show: true
+		})
+	}
+	hideListModal = () => {
+		this.setState({
+			show: false
+		})
+	}
 	render() {
 		return (
 			<div>
@@ -40,6 +66,7 @@ class Main extends React.Component {
 					<br />
 					<button onClick={this.submitButton}>Search Your City</button>
 				</form>
+				{this.state.show ? <RandomRestaurantModal show={this.state.show} hide={this.hideListModal} /> : null }
 			</div>
 		)
 	}
