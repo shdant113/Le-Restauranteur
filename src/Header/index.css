@@ -1,0 +1,36 @@
+.header {
+	display: flex;
+	justify-content: space-around;
+}
+
+.nav-bar {
+
+}
+
+nav {
+	display: none;
+}
+
+nav:hover {
+	display: block;
+}
+
+a {
+	text-decoration: none
+}
+
+li {
+	list-style: none;
+}
+
+.nav-bar > ul > li {
+	visibility: hidden;
+}
+
+.nav-bar:hover > ul > li{
+	visibility: visible;
+}
+
+ul {
+	padding: 0;
+}

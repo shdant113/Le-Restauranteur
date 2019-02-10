@@ -8,7 +8,7 @@ class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			loggedIn: false
+			loggedIn: true
 		}
 	}
 	loginStatus = () => {
@@ -19,7 +19,6 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App">
-				<h1>This is an app about food</h1>
 				{this.state.loggedIn ? <Main /> : <Login loginStatus={this.loginStatus} />}
 			</div>
 		);

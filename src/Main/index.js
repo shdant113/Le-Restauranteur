@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import '../ResultsModal/index.css'
-import Modal from '../ResultsModal'
+import '../ResultsModal/index.css';
+import Modal from '../ResultsModal';
+import Header from '../Header';
+import '../Header/index.css';
 
 class Main extends React.Component {
 	constructor() {
@@ -57,7 +59,11 @@ class Main extends React.Component {
 	}
 	render() {
 		return (
+			// header / navigation
+			// search bar
+			// modal displayed for search
 			<div>
+				<Header />
 				<h1>this is a list of places</h1>
 				<form>
 					<input type='text' name='search' 
