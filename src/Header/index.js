@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Header = () => {
+const Header = (props) => {
 	return (
 		<div>
 			<header className='header'>
@@ -19,7 +19,7 @@ const Header = () => {
 					</h1>
 				</div>
 				<div>
-					<a href='/'>Your Profile</a>
+					<button onClick={props.goToProfile}>Your Profile</button>
 				</div>
 			</header>
 		</div>

@@ -4,6 +4,7 @@ import '../ResultsModal/index.css';
 import Modal from '../ResultsModal';
 import Header from '../Header';
 import '../Header/index.css';
+import Profile from '../Profile';
 
 class Main extends React.Component {
 	constructor() {
@@ -13,7 +14,8 @@ class Main extends React.Component {
 			city: '',
 			show: false,
 			username: '',
-			loggedIn: true
+			loggedIn: true,
+			profile: false
 		}
 	} 
 	handleLogout = () => {
@@ -57,23 +59,38 @@ class Main extends React.Component {
 			show: false
 		})
 	}
+	goToProfile = () => {
+		this.setState({
+			profile: true
+		})
+	}
+	closeProfile = () => {
+		this.setState({
+			profile: false
+		})
+	}
 	render() {
 		return (
 			// header / navigation
 			// search bar
 			// modal displayed for search
 			<div>
-				<Header />
-				<h1>this is a list of places</h1>
-				<form>
-					<input type='text' name='search' 
-					placeholder='enter your city' 
-					value={this.state.city}
-					onChange={this.handleChange} />
-					<br />
-					<button onClick={this.submitButton}>Search Your City</button>
-				</form>
-				{this.state.show ? <Modal show={this.state.show} hide={this.hideListModal}/> : null }
+				<div>
+					<Header goToProfile={this.goToProfile}/>
+				</div>
+				<div>
+					{this.state.profile ? <Profile closeProfile={this.closeProfile}/> : 
+						<form>
+							<input type='text' name='search' 
+							placeholder='enter your city' 
+							value={this.state.city}
+							onChange={this.handleChange} />
+							<br />
+							<button onClick={this.submitButton}>Search Your City</button>
+						</form>
+					}
+					{this.state.show ? <Modal show={this.state.show} hide={this.hideListModal}/> : null }
+				</div>
 			</div>
 		)
 	}
