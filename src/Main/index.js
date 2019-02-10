@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import RandomRestaurantModal from '../ResultsModal'
+import '../ResultsModal/index.css'
+import Modal from '../ResultsModal'
 
 class Main extends React.Component {
 	constructor() {
@@ -66,7 +67,7 @@ class Main extends React.Component {
 					<br />
 					<button onClick={this.submitButton}>Search Your City</button>
 				</form>
-				{this.state.show ? <RandomRestaurantModal show={this.state.show} hide={this.hideListModal} /> : null }
+				{this.state.show ? <Modal show={this.state.show} hide={this.hideListModal}/> : null }
 			</div>
 		)
 	}
