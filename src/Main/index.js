@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import '../ResultsModal/index.css';
-import Modal from '../ResultsModal';
+import Results from '../ResultsModal';
 import Header from '../Header';
 import '../Header/index.css';
 import Profile from '../Profile';
@@ -69,6 +69,29 @@ class Main extends React.Component {
 			profile: false
 		})
 	}
+	getRestaurants = async () => {
+		try {
+			const response = await fetch('http://localhost:9000/api/v1/restaurantsga', {
+				method: 'GET',
+				credentials: 'include'
+			});
+			console.log(response)
+			if (!response.ok) {
+				throw Error(response.statusText);
+			}
+			const parseResponse = await response.json();
+			this.setState({
+				restaurants: parseResponse.data
+			});
+			console.log(parseResponse);
+		} catch (err) {
+			console.log(err)
+			return err
+		}
+	}
+	componentDidMount() {
+		this.getRestaurants();
+	}
 	render() {
 		return (
 			// header / navigation
@@ -89,7 +112,7 @@ class Main extends React.Component {
 							<button onClick={this.submitButton}>Search Your City</button>
 						</form>
 					}
-					{this.state.show ? <Modal show={this.state.show} hide={this.hideListModal}/> : null }
+					{this.state.show ? <Results show={this.state.show} hide={this.hideListModal} restaurants={this.state.restaurants}/> : null }
 				</div>
 			</div>
 		)

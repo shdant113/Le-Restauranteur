@@ -18,7 +18,6 @@ class Register extends React.Component {
 		this.props.registrationHandler();
 	} 
 	render() {
-
 		return (
 			<div className="modal">
 				<div className="modal-main">
