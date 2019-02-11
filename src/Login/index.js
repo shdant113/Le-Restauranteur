@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import Register from '../Register';
 
 class Login extends Component {
 	constructor() {
 		super();
 		this.state = {
 			username: '',
-			password: ''
+			password: '',
+			registrationOpen: false
 		}
 	}
 	handleChange = (e) => {
@@ -40,26 +42,44 @@ class Login extends Component {
 		// 	return err
 		// }
 	}
+	registrationOpen = () => {
+		this.setState({
+			registrationOpen: true
+		})
+	}
+	registrationHandler = async (e) => {
+		e.preventDefault()
+		await this.setState({
+			registrationOpen: false
+		})
+		this.props.loginStatus();
+	}
 	render() {
 		console.log(this.state)
 		return (
 			<div>
-				<form onSubmit={this.handleSubmit}>
-					<label>
-						Username:
-						<input type='text' name='username' 
-						value={this.state.username} 
-						placeholder='username' onChange={this.handleChange} />
-					</label>
-					<br />
-					<label>
-						Password:
-						<input type='password' name='password' 
-						value={this.state.password} onChange={this.handleChange} />
-					</label>
-					<br />
-					<input type='submit' />
-				</form>
+				<div>
+					<form onSubmit={this.handleSubmit}>
+						<label>
+							Username:
+							<input type='text' name='username' 
+							value={this.state.username} 
+							placeholder='username' onChange={this.handleChange} />
+						</label>
+						<br />
+						<label>
+							Password:
+							<input type='password' name='password' 
+							value={this.state.password} onChange={this.handleChange} />
+						</label>
+						<br />
+						<input type='submit' />
+						<h3>Don't have an account? Click <button onClick={this.registrationOpen}>here</button>.</h3>
+					</form>
+				</div>
+				<div>
+				{ this.state.registrationOpen ? <Register registrationHandler={this.registrationHandler}/> : null}
+				</div>
 			</div>
 		)
 	}

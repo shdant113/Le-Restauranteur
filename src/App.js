@@ -3,19 +3,20 @@ import logo from './logo.svg';
 import './App.css';
 import Main from './Main';
 import Login from './Login';
+import { Route, Switch } from 'react-router-dom';
 
 class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			loggedIn: true
+			loggedIn: false
 		}
 	}
 	loginStatus = () => {
 		this.setState({
 			loggedIn: true
 		})
-	} 
+	}
 	render() {
 		return (
 			<div className="App">
