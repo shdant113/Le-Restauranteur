@@ -1,10 +1,27 @@
 .header {
 	display: flex;
 	justify-content: space-around;
+	background: url("../header-bkgd.jpeg") center;
+	background-size: cover;
+	height: 200px;
+	border: 1px solid black;
+	margin: 0 0 50px 0;
 }
 
-.nav-bar {
+.wrap{
+	display: flex;
+	width: 100%;
+	justify-content: space-around;
+	background-color: rgba(255, 255, 255, 0.5);
+	padding: 20px;
+}
 
+.header-h1{
+	font-family: 'Ramaraja', serif;
+	font-weight: 800;
+	font-size: 70px;
+	text-shadow: 5px 5px 5px white;
+	color: navy;
 }
 
 nav {
@@ -16,11 +33,15 @@ nav:hover {
 }
 
 a {
-	text-decoration: none
+	text-decoration: none;
+	color: navy;
+	text-shadow: 5px 5px 5px white;
 }
 
 li {
 	list-style: none;
+	color: navy;
+	text-shadow: 5px 5px 5px white;
 }
 
 .nav-bar > ul > li {
