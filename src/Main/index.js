@@ -93,6 +93,7 @@ class Main extends React.Component {
 		this.getRestaurants();
 	}
 	render() {
+		console.log(this.state)
 		return (
 			// header / navigation
 			// search bar

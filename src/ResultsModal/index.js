@@ -3,20 +3,21 @@ import React from 'react';
 const Results = (props) => {
 	const modalClass = props.show ? "modal" : "modal display-none"
 	console.log(props.restaurants)
-	const getRestaurants = props.restaurants.map((restaurants, i) => {
-		return (
-			<li key={i} style={{listStyleType: "none"}}>
-				Name: {restaurants.name}
-				<br />
-				Address: {restaurants.address}
-				<br />
-				City: {restaurants.city}
-				<br />
-				State: {restaurants.state}
-				<hr />
-			</li>
-		)
-	})
+	const randomIndex = parseInt(Math.random() * 20)
+	console.log(randomIndex)
+	const getRestaurants = props.restaurants.results.map((restaurants, i) => {
+		if (i == randomIndex) {
+			return (
+				<li key={i} style={{listStyleType: "none"}}>
+					{restaurants.name}
+					<br />
+					{restaurants.formatted_address}
+					<hr />
+				</li>
+			)
+		}
+	})	
+	// console.log(getRestaurants)
 	return (
 		<div className={modalClass}>
 			<section className="modal-main">
