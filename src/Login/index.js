@@ -7,7 +7,7 @@ class Login extends Component {
 		this.state = {
 			username: '',
 			password: '',
-			registrationOpen: false
+			showRegistration: false
 		}
 	}
 	handleChange = (e) => {
@@ -36,7 +36,7 @@ class Login extends Component {
 		// 		// when this login is successful, use the push method to go to the movies route and carry the browser history (basically in array) in the session information
 		// 		this.props.history.push('/movies');
 		// 	}
-		this.props.loginStatus();
+		this.login()
 		// } catch (err) {
 		// 	console.log(err)
 		// 	return err
@@ -44,16 +44,18 @@ class Login extends Component {
 	}
 	registrationOpen = () => {
 		this.setState({
-			registrationOpen: true
+			showRegistration: true
 		})
 	}
 	registrationHandler = async (e) => {
 		e.preventDefault()
-		await this.setState({
-			registrationOpen: false
+		this.setState({
+			showRegistration: false
 		})
-		this.props.loginStatus();
 	}
+	login = (e) =>{
+		this.props.loginStatus();
+	}	
 	render() {
 		console.log(this.state)
 		return (
@@ -74,11 +76,11 @@ class Login extends Component {
 						</label>
 						<br />
 						<input type='submit' />
-						<h3>Don't have an account? Click <button onClick={this.registrationOpen}>here</button>.</h3>
 					</form>
 				</div>
 				<div>
-				{ this.state.registrationOpen ? <Register registrationHandler={this.registrationHandler}/> : null}
+					<h3>Don't have an account? Click <button onClick={this.registrationOpen}>here</button>.</h3>
+					{ this.state.showRegistration ? <Register registrationHandler={this.registrationHandler} showRegistration={this.state.showRegistration} /> : null}
 				</div>
 			</div>
 		)
