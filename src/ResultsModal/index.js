@@ -8,7 +8,7 @@ const Results = (props) => {
 	const getRestaurants = props.restaurants.results.map((restaurants, i) => {
 		if (i == randomIndex) {
 			return (
-				<li key={i} style={{listStyleType: "none"}}>
+				<li className="results-text" key={i} style={{listStyleType: "none"}}>
 					{restaurants.name}
 					<br />
 					{restaurants.formatted_address}
@@ -24,7 +24,8 @@ const Results = (props) => {
 				<ul style={{padding: 0}}>
 					{getRestaurants}
 				</ul>
-				<button onClick={props.hide}>Close This Modal</button>
+				<button className="modal-button" onClick={props.hide}>Search Something Else</button>
+				<button className="modal-button" onClick={props.search}>Pick Another Restaurant</button>
 			</section>
 		</div>
 	)

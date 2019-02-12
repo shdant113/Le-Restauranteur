@@ -8,14 +8,14 @@ const Header = (props) => {
 					<div className='nav'>
 						<li className="nav-bar">Navigation
 							<ul>
-								<li><a onClick={props.goToMain}>Home</a></li>
-								<li><a onClick={props.handleLogout}>Log Out</a></li>
+								<li className="nav-sub"><a onClick={props.goToMain}>Home</a></li>
+								<li className="nav-sub"><a onClick={props.handleLogout}>Log Out</a></li>
 							</ul>
 						</li>
 					</div>
 					<div>
 						<h1 className="header-h1">
-							Where To Eat?
+							Le Restauranteur
 						</h1>
 					</div>
 					<div>

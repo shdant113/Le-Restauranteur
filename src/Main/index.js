@@ -119,7 +119,7 @@ class Main extends React.Component {
 							<button onClick={this.submitButton}>Search Your City</button>
 						</form>
 					}
-					{this.state.show ? <Results show={this.state.show} hide={this.hideListModal} restaurants={this.state.restaurants}/> : null }
+					{this.state.show ? <Results show={this.state.show} hide={this.hideListModal} restaurants={this.state.restaurants} search={this.submitButton}/> : null }
 				</div>
 			</div>
 		)

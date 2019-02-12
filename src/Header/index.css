@@ -5,7 +5,7 @@
 	background-size: cover;
 	height: 200px;
 	border: 1px solid black;
-	margin: 0 0 50px 0;
+	margin: -50px 0 50px 0;
 }
 
 .wrap{
@@ -35,18 +35,24 @@ nav:hover {
 a {
 	text-decoration: none;
 	color: navy;
-	text-shadow: 5px 5px 5px white;
 	cursor: pointer;
+}
+
+a:hover {
+	text-shadow: 5px 5px 5px white;
 }
 
 li {
 	list-style: none;
 	color: navy;
-	text-shadow: 5px 5px 5px white;
 }
 
 .nav-bar {
 	cursor: pointer;
+}
+
+.nav-bar:hover {
+	text-shadow: 5px 5px 5px white;
 }
 
 .nav-bar > ul > li {
