@@ -9,7 +9,7 @@ class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			loggedIn: true
+			loggedIn: false
 		}
 	}
 	loginStatus = () => {
@@ -17,10 +17,17 @@ class App extends Component {
 			loggedIn: true
 		})
 	}
+	handleLogout = () => {
+		this.setState({
+			loggedIn: false
+		})
+		// set loggedIn to false
+		// redirect to login/home screen
+	}
 	render() {
 		return (
 			<div className="App">
-				{this.state.loggedIn ? <Main /> : <Login loginStatus={this.loginStatus} />}
+				{this.state.loggedIn ? <Main handleLogout={this.handleLogout}/> : <Login loginStatus={this.loginStatus} />}
 			</div>
 		);
 	}

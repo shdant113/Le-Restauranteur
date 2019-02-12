@@ -5,6 +5,7 @@ import Results from '../ResultsModal';
 import Header from '../Header';
 import '../Header/index.css';
 import Profile from '../Profile';
+import Login from '../Login';
 
 class Main extends React.Component {
 	constructor() {
@@ -18,14 +19,13 @@ class Main extends React.Component {
 			profile: false
 		}
 	} 
-	handleLogout = () => {
-		// set loggedIn to false
-		// redirect to login/home screen
-	}
 	handleChange = (e) => {
 		this.setState({
 			city: e.currentTarget.value
 		})
+	}
+	handleLogout = () => {
+		this.props.handleLogout()
 	}
 	submitButton = async (e) => {
 		e.preventDefault()
@@ -69,6 +69,12 @@ class Main extends React.Component {
 			profile: false
 		})
 	}
+	goToMain = () => {
+		this.setState({
+			profile: false,
+			show: false
+		})
+	}
 	getRestaurants = async () => {
 		try {
 			const response = await fetch('http://localhost:9000/api/v1/restaurantsga', {
@@ -100,7 +106,7 @@ class Main extends React.Component {
 			// modal displayed for search
 			<div>
 				<div>
-					<Header goToProfile={this.goToProfile}/>
+					<Header goToProfile={this.goToProfile} goToMain={this.goToMain} handleLogout={this.handleLogout}/>
 				</div>
 				<div>
 					{this.state.profile ? <Profile closeProfile={this.closeProfile}/> : 

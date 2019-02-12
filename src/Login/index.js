@@ -60,7 +60,7 @@ class Login extends Component {
 		console.log(this.state)
 		return (
 			<div>
-				<div>
+				<div className="login-wrap">
 					<form onSubmit={this.handleSubmit}>
 						<label>
 							Username:

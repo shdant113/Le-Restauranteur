@@ -8,9 +8,8 @@ const Header = (props) => {
 					<div className='nav'>
 						<li className="nav-bar">Navigation
 							<ul>
-								<li><a href="/">Home</a></li>
-								<li><a href="/">Search</a></li>
-								<li><a href="/">Log Out</a></li>
+								<li><a onClick={props.goToMain}>Home</a></li>
+								<li><a onClick={props.handleLogout}>Log Out</a></li>
 							</ul>
 						</li>
 					</div>
@@ -20,7 +19,7 @@ const Header = (props) => {
 						</h1>
 					</div>
 					<div>
-						<button onClick={props.goToProfile}>Your Profile</button>
+						<li><a onClick={props.goToProfile}>Your Profile</a></li>
 					</div>
 				</div>
 			</header>
