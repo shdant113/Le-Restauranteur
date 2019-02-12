@@ -14,8 +14,9 @@ class Register extends React.Component {
 			[e.target.name]: e.target.value
 		});
 	}
-	onSubmit = () => {
-		this.props.registrationHandler();
+	onSubmit = (e) => {
+		e.preventDefault()
+		this.props.registrationHandler(this.state);
 	} 
 	render() {
 		return (
