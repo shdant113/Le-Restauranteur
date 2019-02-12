@@ -16,7 +16,8 @@ class Main extends React.Component {
 			show: false,
 			username: '',
 			loggedIn: true,
-			profile: false
+			profile: false,
+			saved: []
 		}
 	} 
 	handleChange = (e) => {
@@ -95,6 +96,14 @@ class Main extends React.Component {
 			return err
 		}
 	}
+	saveRestaurant = async () => {
+		try {
+			
+		} catch (err) {
+			console.log(err)
+			return err
+		}
+	} 
 	componentDidMount() {
 		this.getRestaurants();
 	}
@@ -119,7 +128,7 @@ class Main extends React.Component {
 							<button onClick={this.submitButton}>Search Your City</button>
 						</form>
 					}
-					{this.state.show ? <Results show={this.state.show} hide={this.hideListModal} restaurants={this.state.restaurants} search={this.submitButton}/> : null }
+					{this.state.show ? <Results show={this.state.show} hide={this.hideListModal} restaurants={this.state.restaurants} search={this.submitButton} saveRestaurant={this.saveRestaurant}/> : null }
 				</div>
 			</div>
 		)
