@@ -7,7 +7,8 @@ class Login extends Component {
 		this.state = {
 			username: '',
 			password: '',
-			showRegistration: false
+			showRegistration: false,
+			incorrectLogin: false
 		}
 	}
 	handleChange = (e) => {
@@ -34,12 +35,12 @@ class Login extends Component {
 			// console.log(parsedResponse, ' login response parsed')
 			if (parsedResponse.data === 'login information is correct') {
 				console.log('login information is correct')
-				// // when this login is successful, use the push method to go to the movies route and carry the browser history (basically in array) in the session information
-				// const { history } = this.props
-				// console.log({ history })
-				// history.push('/');
+				this.props.loginStatus()
+			} else {
+				this.setState({
+					incorrectLogin: true
+				})
 			}
-			this.props.loginStatus()
 		} catch (err) {
 			console.log(err)
 			return err
@@ -76,21 +77,19 @@ class Login extends Component {
 					showRegistration: false
 				})
 			}
-			// this.login();
+			this.props.loginStatus()
 		} catch (err) {
 			console.log('straight to error')
 			console.log(err)
 			return err
 		}
 	}
-	// login = (e) =>{
-	// 	this.props.loginStatus();
-	// }	
 	render() {
 		console.log(this.state)
 		return (
 			<div>
 				<div className="login-wrap">
+					{ this.state.incorrectLogin ? <h3>Incorrect login, please try again.</h3> : null }
 					<form onSubmit={this.handleSubmit}>
 						<label>
 							Username:

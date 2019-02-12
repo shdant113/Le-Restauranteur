@@ -16,8 +16,7 @@ const Results = (props) => {
 				</li>
 			)
 		}
-	})	
-	console.log(getRestaurants._id)
+	})
 	return (
 		<div className={modalClass}>
 			<section className="modal-main">
@@ -27,7 +26,7 @@ const Results = (props) => {
 				<button className="modal-button" onClick={props.hide}>Search Something Else</button>
 				<button className="modal-button" onClick={props.search}>Pick Another Restaurant</button>
 				<br />
-				<button className="modal-button" onClick={props.saveRestaurant.bind(null, getRestaurants[randomIndex]._id)}>Save This Restaurant</button>
+				<button className="modal-button" onClick={props.saveRestaurant.bind(null, getRestaurants[randomIndex])}>Save This Restaurant</button>
 			</section>
 		</div>
 	)

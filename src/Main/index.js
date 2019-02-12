@@ -96,19 +96,24 @@ class Main extends React.Component {
 			return err
 		}
 	}
-	saveRestaurant = async () => {
-		try {
-			
-		} catch (err) {
-			console.log(err)
-			return err
-		}
+	saveRestaurant = (restaurant, e) => {
+		e.preventDefault()
+		console.log(restaurant.props.children[0] + ' is in saveRestaurant')
+		console.log(restaurant)
+		this.setState({
+			saved: [...this.state.saved, restaurant.props.children]
+		})
+		// transfer info to back end to store in db under user
+			// set up in user model
+			// add route?
+		// reset saved state by calling on another function,
 	} 
 	componentDidMount() {
 		this.getRestaurants();
 	}
 	render() {
 		console.log(this.state)
+		console.log(this.state.saved + ' saved restaurant')
 		return (
 			// header / navigation
 			// search bar
