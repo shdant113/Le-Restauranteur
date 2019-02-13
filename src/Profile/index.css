@@ -1,0 +1,12 @@
+.user-profile-title, .user-profile-restaurants {
+	color: white;
+}
+
+.profile-wrap {
+	width: 60%;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: rgba(0, 0, 0, 0.6);
+	border-radius: 50px;
+}
+

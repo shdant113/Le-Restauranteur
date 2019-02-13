@@ -5,7 +5,7 @@
 	background-size: cover;
 	height: 200px;
 	border: 1px solid black;
-	margin: -50px 0 50px 0;
+	margin: 0 0 50px 0
 }
 
 .wrap{
@@ -24,15 +24,8 @@
 	color: navy;
 }
 
-nav {
-	display: none;
-}
-
-nav:hover {
-	display: block;
-}
-
-a {
+.nav-sub, .nav-bar {
+	font-weight: 700;
 	text-decoration: none;
 	color: navy;
 	cursor: pointer;
@@ -40,15 +33,6 @@ a {
 
 a:hover {
 	text-shadow: 5px 5px 5px white;
-}
-
-li {
-	list-style: none;
-	color: navy;
-}
-
-.nav-bar {
-	cursor: pointer;
 }
 
 .nav-bar:hover {
@@ -61,8 +45,4 @@ li {
 
 .nav-bar:hover > ul > li{
 	visibility: visible;
-}
-
-ul {
-	padding: 0;
 }

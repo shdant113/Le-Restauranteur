@@ -125,7 +125,7 @@ class Login extends Component {
 					</form>
 				</div>
 				<div className={this.state.registrationClass}>
-					{ !this.state.showRegistration ? <h2>Don't have an account? Click <a onClick={this.registrationOpen}>here</a>.</h2> :
+					{ !this.state.showRegistration ? <h2>Don't have an account? Click <a className="login-a" onClick={this.registrationOpen}>here</a>.</h2> :
 					<h2>Register your account below.</h2> }
 					{ this.state.showRegistration ? <Register registrationHandler={this.registrationHandler} showRegistration={this.state.showRegistration} /> : null}
 				</div>

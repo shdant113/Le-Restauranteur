@@ -4,6 +4,7 @@ import '../ResultsModal/index.css';
 import Results from '../ResultsModal';
 import Header from '../Header';
 import '../Header/index.css';
+import './index.css';
 import Profile from '../Profile';
 import Login from '../Login';
 
@@ -17,7 +18,8 @@ class Main extends React.Component {
 			username: '',
 			loggedIn: true,
 			profile: false,
-			saved: []
+			saved: [],
+			formClass: 'main-form'
 		}
 	} 
 	handleChange = (e) => {
@@ -52,29 +54,34 @@ class Main extends React.Component {
 	}
 	showListModal = () => {
 		this.setState({
-			show: true
+			show: true,
+			formClass: 'display-none'
 		})
 	}
 	hideListModal = () => {
 		this.setState({
-			show: false
+			show: false,
+			formClass: 'main-form'
 		})
 	}
 	goToProfile = () => {
 		this.setState({
 			profile: true,
-			show: false
+			show: false,
+			formClass: 'display-none'
 		})
 	}
 	closeProfile = () => {
 		this.setState({
-			profile: false
+			profile: false,
+			formClass: 'main-form'
 		})
 	}
 	goToMain = () => {
 		this.setState({
 			profile: false,
-			show: false
+			show: false,
+			formClass: 'main-form'
 		})
 	}
 	getRestaurants = async () => {
@@ -131,25 +138,25 @@ class Main extends React.Component {
 		this.getRestaurants();
 	}
 	render() {
-		console.log(this.state)
-		console.log(this.state.saved + ' saved restaurant')
+		// console.log(this.state)
+		// console.log(this.state.saved + ' saved restaurant')
 		return (
-			// header / navigation
-			// search bar
-			// modal displayed for search
 			<div>
 				<div>
 					<Header goToProfile={this.goToProfile} goToMain={this.goToMain} handleLogout={this.handleLogout}/>
 				</div>
 				<div>
 					{this.state.profile ? <Profile closeProfile={this.closeProfile}/> : 
-						<form>
+						<form className={this.state.formClass}>
+							<h2 className="main-form-text">Let Le Restauranteur make a hard choice easy and enter your city below.</h2>
+							<h5 className="main-form-text">Don't know where to go to eat tonight? We search an exhaustive list of the finest restaurants in your city and return a random restaurant for you. Don't like it? No big deal, you can search again! Love it? Great! Save it to your profile and you can remember it the next time you need somewhere to go.</h5>
+							<h5 className="main-form-text">If your city name is a common name, you can also include your state for better results!</h5>
 							<input type='text' name='search' 
 							placeholder='enter your city' 
 							value={this.state.city}
 							onChange={this.handleChange} />
 							<br />
-							<button onClick={this.submitButton}>Search Your City</button>
+							<button className="main-form-button" onClick={this.submitButton}>Search Your City</button>
 						</form>
 					}
 					{this.state.show ? <Results show={this.state.show} hide={this.hideListModal} restaurants={this.state.restaurants} search={this.submitButton} saveRestaurant={this.saveRestaurant}/> : null }

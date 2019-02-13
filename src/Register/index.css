@@ -1,29 +1,29 @@
 .register-modal {
-  position: fixed;
-  display: block;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: scroll;
-  background: rgba(0, 0, 0, 0.6);
+	position: fixed;
+	display: block;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: scroll;
+	background: rgba(0, 0, 0, 0.6);
 }
 
-.modal-main {
-  /* to style later */
-  position: fixed;
-  background: red;
-  width: max-content%;
-  height: auto;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-}
+/*.modal-main {
+	to style later 
+	position: fixed;
+	background: red;
+	width: max-content%;
+	height: auto;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+} */
 
 /*.visible {
-  margin-top: -50px;
+	margin-top: -50px;
 }*/
 
 .display-none {
-  display: none;
+	display: none;
 }

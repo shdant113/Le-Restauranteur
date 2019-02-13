@@ -6,10 +6,11 @@ const Header = (props) => {
 			<header className='header'>
 				<div className='wrap'>
 					<div className='nav'>
-						<li className="nav-bar">Navigation
+						<li className="nav-bar">
+						Navigation
 							<ul>
-								<li className="nav-sub"><a onClick={props.goToMain}>Home</a></li>
-								<li className="nav-sub"><a onClick={props.handleLogout}>Log Out</a></li>
+								<li><a className="nav-sub" onClick={props.goToMain}>Home</a></li>
+								<li><a className="nav-sub" onClick={props.handleLogout}>Log Out</a></li>
 							</ul>
 						</li>
 					</div>
@@ -19,7 +20,7 @@ const Header = (props) => {
 						</h1>
 					</div>
 					<div>
-						<li><a onClick={props.goToProfile}>Your Profile</a></li>
+						<li><a className="nav-sub" onClick={props.goToProfile}>Your Profile</a></li>
 					</div>
 				</div>
 			</header>

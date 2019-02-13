@@ -1,0 +1,21 @@
+.main-form {
+	width: 60%;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: rgba(0, 0, 0, 0.6);
+	border-radius: 50px;
+}
+
+.main-form-text {
+	color: white;
+}
+
+.main-form-button {
+	border: 2px solid black;
+	border-radius: 10px;
+	width: 200px;
+}
+
+.display-none {
+	display: none;
+}
