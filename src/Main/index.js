@@ -96,7 +96,7 @@ class Main extends React.Component {
 			}
 			const parseResponse = await response.json();
 			this.setState({
-				restaurants: parseResponse.data
+				restaurants: parseResponse.data.results
 			});
 			console.log(parseResponse);
 		} catch (err) {
@@ -106,16 +106,16 @@ class Main extends React.Component {
 	}
 	saveRestaurant = async (restaurant, e) => {
 		e.preventDefault()
-		console.log(restaurant.props.children[0] + ' is in saveRestaurant')
-		console.log(restaurant)
-		this.setState({
-			saved: [...this.state.saved, restaurant.props.children]
-		})
+		// console.log(restaurant.props.children[0] + ' is in saveRestaurant')
+
 		try {
 			const response = await fetch('http://localhost:9000/api/v1/restaurantsga/save', {
 				method: 'POST',
 				credentials: 'include',
-				body: JSON.stringify(this.state.saved),
+				body: JSON.stringify({
+					name: restaurant.name,
+					formatted_address: restaurant.formatted_address
+				}),
 				headers: {
 					'Content-Type': 'application/json'
 				}

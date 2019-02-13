@@ -7,7 +7,6 @@ const Profile = (props) => {
 		return (
 			<li key={i} className="user-profile-restaurants">
 				{ restaurants }
-				<hr />
 			</li>
 		)
 	})
