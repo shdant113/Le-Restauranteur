@@ -1,3 +1,40 @@
 .login-wrap {
 	margin: 100px;
+	background-color: rgba(0, 0, 0, 0.6);
+	border-radius: 50px;
+}
+
+.login-form, .login-register-text, .login-register-adjust {
+	padding: 10px;
+	color: white;
+	font-weight: 700;
+}
+
+.login-register-adjust {
+	margin-top: -75px;
+}
+
+a {
+	color: white;
+}
+
+.header-h1-login {
+	font-family: 'Ramaraja', serif;
+	font-weight: 800;
+	font-size: 70px;
+	text-shadow: 5px 5px 5px rgba(200, 200, 200, 0.4);
+	color: rgba(255, 255, 255, 1);
+}
+
+.login-first-h2 {
+	margin-top: -50px;
+	color: white;
+	font-weight: 700;
+}
+
+input {
+	width: 150px;
+	height: 20px;
+	text-align: center;
+	margin: 10px;
 }

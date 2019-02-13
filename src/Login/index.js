@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Register from '../Register';
+import './index.css'
+
+// const loginClass = this.state.showRegistration ? "display-none" : null
 
 class Login extends Component {
 	constructor() {
@@ -8,7 +11,9 @@ class Login extends Component {
 			username: '',
 			password: '',
 			showRegistration: false,
-			incorrectLogin: false
+			incorrectLogin: false,
+			loginClass: null,
+			registrationClass: 'login-register-text'
 		}
 	}
 	handleChange = (e) => {
@@ -48,7 +53,9 @@ class Login extends Component {
 	}
 	registrationOpen = () => {
 		this.setState({
-			showRegistration: true
+			showRegistration: true,
+			loginClass: 'display-none',
+			registrationClass: 'login-register-adjust'
 		})
 	}
 	registrationHandler = async (state) => {
@@ -74,7 +81,9 @@ class Login extends Component {
 				this.setState({
 					username: state.username,
 					password: state.password,
-					showRegistration: false
+					showRegistration: false,
+					loginClass: null,
+					registrationClass: 'login-register-text'
 				})
 			}
 			this.props.loginStatus()
@@ -87,12 +96,19 @@ class Login extends Component {
 	render() {
 		console.log(this.state)
 		return (
-			<div>
-				<div className="login-wrap">
+			<div className="login-wrap">
+				<div>
+					<h1 className="header-h1-login">
+						Le Restauranteur
+					</h1>
+				</div>
+				<div className={this.state.loginClass}>
 					{ this.state.incorrectLogin ? <h3>Incorrect login, please try again.</h3> : null }
-					<form onSubmit={this.handleSubmit}>
+					<h2 className="login-first-h2">Already have an account? Log in below.</h2>
+					<form className="login-form" onSubmit={this.handleSubmit}>
 						<label>
 							Username:
+							<br />
 							<input type='text' name='username' 
 							value={this.state.username} 
 							placeholder='username' onChange={this.handleChange} />
@@ -100,15 +116,17 @@ class Login extends Component {
 						<br />
 						<label>
 							Password:
+							<br />
 							<input type='password' name='password' 
-							value={this.state.password} onChange={this.handleChange} />
+							value={this.state.password} placeholder='password'onChange={this.handleChange} />
 						</label>
 						<br />
 						<input type='submit' />
 					</form>
 				</div>
-				<div>
-					<h3>Don't have an account? Click <button onClick={this.registrationOpen}>here</button>.</h3>
+				<div className={this.state.registrationClass}>
+					{ !this.state.showRegistration ? <h2>Don't have an account? Click <a onClick={this.registrationOpen}>here</a>.</h2> :
+					<h2>Register your account below.</h2> }
 					{ this.state.showRegistration ? <Register registrationHandler={this.registrationHandler} showRegistration={this.state.showRegistration} /> : null}
 				</div>
 			</div>

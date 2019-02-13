@@ -62,7 +62,8 @@ class Main extends React.Component {
 	}
 	goToProfile = () => {
 		this.setState({
-			profile: true
+			profile: true,
+			show: false
 		})
 	}
 	closeProfile = () => {

@@ -20,8 +20,8 @@ class Register extends React.Component {
 	} 
 	render() {
 		return (
-			<div className="modal">
-				<div className="modal-main">
+			<div className="register-modal">
+				<div className="register-modal-main">
 					<form onSubmit={this.onSubmit}>
 						<label>
 							Username:

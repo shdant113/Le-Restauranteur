@@ -1,4 +1,4 @@
-.modal {
+.register-modal {
   position: fixed;
   display: block;
   top: 0;
@@ -19,6 +19,10 @@
   left: 50%;
   transform: translate(-50%,-50%);
 }
+
+/*.visible {
+  margin-top: -50px;
+}*/
 
 .display-none {
   display: none;
