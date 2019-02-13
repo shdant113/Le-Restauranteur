@@ -25,6 +25,7 @@ class Register extends React.Component {
 					<form onSubmit={this.onSubmit}>
 						<label>
 							Username:
+							<br />
 							<input type='text' name='username' 
 							value={this.state.username} 
 							placeholder='username' onChange={this.handleChange} />
@@ -32,8 +33,9 @@ class Register extends React.Component {
 						<br />
 						<label>
 							Password:
+							<br />
 							<input type='password' name='password' 
-							value={this.state.password} onChange={this.handleChange} />
+							value={this.state.password} placeholder='password' onChange={this.handleChange} />
 						</label>
 						<br />
 						<input type='submit' />
