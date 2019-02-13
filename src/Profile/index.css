@@ -13,7 +13,7 @@
 .saved-wrap {
 	height: 300px;
 	overflow: scroll;
-	margin-bottom: 20px;
+	margin: 10px 0;
 }
 
 .display-none {

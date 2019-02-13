@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import './index.css'
+import './index.css';
+import Edit from '../Edit';
+import New from '../New';
 
 class Profile extends React.Component {
 	constructor() {
 		super();
 		this.state = {
 			saved: [],
-			name: '',
-			formatted_address: '',
+			editingRestaurant: {
+				name: '',
+				formatted_address: '',
+				_id: null
+			},
 			showEdit: false,
 			showNew: false,
 			profileWrap: "profile-wrap"
@@ -46,13 +51,42 @@ class Profile extends React.Component {
 			profileWrap: "display-none"
 		})
 	}
-	newEntry = (e) => {
+	newEntry = async (e) => {
 		e.preventDefault()
 		this.setState({
 			showNew: true,
 			profileWrap: "display-none"
 		})
-	} 
+	}
+	newRestaurant = async (restaurant, e) => {
+		e.preventDefault()
+		try {
+			const createNewRestaurant = await fetch('http://localhost:9000/api/v1/restaurantsga/', {
+				method: 'POST',
+				credentials: 'include',
+				body: JSON.stringify(restaurant),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+			console.log('call done')
+			if (!createNewRestaurant.ok) {
+				throw Error(createNewRestaurant.statusText)
+			}
+			console.log('no thrown error')
+			const parsedResponse = await createNewRestaurant.json();
+			console.log('response parsed')
+			this.setState({
+				saved: [...this.state.saved, parsedResponse.data],
+				showNew: false,
+				profileWrap: "profile-wrap"
+			})
+			console.log('state reset')
+		} catch (err) {
+			console.log('there was an error')
+			return err
+		}
+	}
 	returnToProfile = (e) => {
 		this.setState({
 			showNew: false,
@@ -85,62 +119,11 @@ class Profile extends React.Component {
 					</div>
 					<button onClick={this.props.closeProfile}>Back To Search</button>
 				</div>
-				<div>
-					{ this.state.showEdit ?
-						<div className="profile-wrap">
-						<h1 className="user-profile-title">Edit Your Saved Restaurant</h1>
-							<div className="saved-wrap">
-								<form onSubmit={this.returnToProfile}>
-									<label>
-										Name:
-										<br />
-										<input type='text' name='name' 
-										placeholder='name' onChange={this.handleChange} />
-									</label>
-									<br />
-									<label>
-										Address:
-										<br />
-										<input type='text' name='formatted_address' 
-										placeholder='address'
-										onChange={this.handleChange} />
-									</label>
-									<br />
-									<input type='submit' />
-								</form>
-							</div>
-						</div>
-						: null 
-					}
-				</div>
-				<div>
-					{ this.state.showNew ?
-						<div className="profile-wrap">
-						<h1 className="user-profile-title">Add A New Restaurant</h1>
-							<div className="saved-wrap">
-								<form onSubmit={this.returnToProfile}>
-									<label>
-										Name:
-										<br />
-										<input type='text' name='name' 
-										placeholder='name' onChange={this.handleChange} />
-									</label>
-									<br />
-									<label>
-										Address:
-										<br />
-										<input type='text' name='formatted_address' 
-										placeholder='address'
-										onChange={this.handleChange} />
-									</label>
-									<br />
-									<input type='submit' />
-								</form>
-							</div>
-						</div>
-						: null 
-					}
-				</div>
+				{ this.state.showEdit ? <Edit returnToProfile={this.returnToProfile}
+				onChange={this.onChange} editingRestaurant={this.state.editingRestaurant}
+				 /> : null }
+				{ this.state.showNew ? <New newRestaurant={this.newRestaurant} 
+				/> : null }
 			</div>
 		)
 	}
