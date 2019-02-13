@@ -28,10 +28,6 @@ ul {
   padding: 0;
 }
 
-button {
-  cursor: pointer;
-}
-
-input[type="submit"]{
+button, input[type="submit"], a {
   cursor: pointer;
 }
