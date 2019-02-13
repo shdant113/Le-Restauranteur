@@ -30,23 +30,32 @@ class Main extends React.Component {
 	handleLogout = () => {
 		this.props.handleLogout()
 	}
-	submitButton = async (e) => {
+	submitButton = async (city, e) => {
 		e.preventDefault()
+		// console.log(city)
 		try {
-			console.log(`submitting ${this.state.city}`)
-			// PROMISES
-			// fetch information from API
-				// method GET credentials include body stringify append headers
-			// check error
-			// json parse response
-			// set new state with restaurants array
-				// run function to display one random index out of restaurants array
-					// remove index of restaurant displayed from available indexes to display so that it does not get displayed again if they choose another random search
-				// display in modal? setstate
-					// reference wireframes --> map display with pin
-						// refer to lab?
-					// button to rerender modal with a new restaurant
-			this.showListModal();
+		// 	const response = await fetch('http://localhost:9000/api/v1/restaurantsga/city', {
+		// 		method: 'POST',
+		// 		mode: 'no-cors',
+		// 		credentials: 'include',
+		// 		body: JSON.stringify({
+		// 			city: city
+		// 		}),
+		// 		headers: {
+		// 			'Content-Type': 'application/json'
+		// 		}
+		// 	})
+		// 	console.log('we got past the response')
+		// 	console.log(response)
+		// 	console.log('we got past logging the response')
+		// 	if (!response.ok) {
+		// 		throw Error(response.statusText);
+		// 	}
+		// 	console.log('we beat the error')
+		// 	const parseResponse = await response.json();
+		// 	console.log('\n we parsed the response')
+		// 	console.log(parseResponse.data.results);
+		// 	// this.showListModal();
 		} catch (err) {
 			console.log(err)
 			return err
@@ -139,9 +148,9 @@ class Main extends React.Component {
 			saved: []
 		})
 	}
-	componentDidMount() {
-		this.getRestaurants();
-	}
+	// componentDidMount() {
+	// 	this.getRestaurants();
+	// }
 	render() {
 		// console.log(this.state)
 		console.log(this.state.saved + ' saved restaurant')
@@ -161,7 +170,7 @@ class Main extends React.Component {
 							value={this.state.city}
 							onChange={this.handleChange} />
 							<br />
-							<button className="main-form-button" onClick={this.submitButton}>Search Your City</button>
+							<button className="main-form-button" onClick={this.submitButton.bind(null, this.state.city)}>Search Your City</button>
 						</form>
 					}
 					{this.state.show ? <Results show={this.state.show} hide={this.hideListModal} restaurants={this.state.restaurants} search={this.submitButton} saveRestaurant={this.saveRestaurant}/> : null }
