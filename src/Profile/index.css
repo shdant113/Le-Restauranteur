@@ -10,3 +10,8 @@
 	border-radius: 50px;
 }
 
+.saved-wrap {
+	height: 300px;
+	overflow: scroll;
+	margin-bottom: 20px;
+}

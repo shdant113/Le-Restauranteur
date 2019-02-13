@@ -51,6 +51,9 @@ class Profile extends React.Component {
 					{restaurants.name}
 					<br />
 					{restaurants.formatted_address}
+					<br />
+					<button>Edit This Restaurant</button>
+					<button>Remove From Your Saved List</button>
 					<hr />
 				</li>
 			)
@@ -58,7 +61,9 @@ class Profile extends React.Component {
 		return (
 			<div className="profile-wrap">
 				<h1 className="user-profile-title">Your Saved Restaurants</h1>
-				<h3 className="user-profile-restaurants">{mappedRestaurants}</h3>
+				<div className="saved-wrap">
+					<h3 className="user-profile-restaurants">{mappedRestaurants}</h3>
+				</div>
 				<button onClick={this.props.closeProfile}>Back To Search</button>
 			</div>
 		)
