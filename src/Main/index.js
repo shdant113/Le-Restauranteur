@@ -120,7 +120,12 @@ class Main extends React.Component {
 					'Content-Type': 'application/json'
 				}
 			})
-			console.log(response)
+			// console.log(response)
+			if (!response.ok) {
+				throw Error(response.statusText);
+			}
+			// const parseResponse = await response.json();
+			// console.log('parseResponse is ' + parseResponse)	
 		} catch (err) {
 			console.log(err)
 		}
@@ -139,14 +144,14 @@ class Main extends React.Component {
 	}
 	render() {
 		// console.log(this.state)
-		// console.log(this.state.saved + ' saved restaurant')
+		console.log(this.state.saved + ' saved restaurant')
 		return (
 			<div>
 				<div>
 					<Header goToProfile={this.goToProfile} goToMain={this.goToMain} handleLogout={this.handleLogout}/>
 				</div>
 				<div>
-					{this.state.profile ? <Profile closeProfile={this.closeProfile}/> : 
+					{this.state.profile ? <Profile saved={this.state.saved} closeProfile={this.closeProfile}/> : 
 						<form className={this.state.formClass}>
 							<h2 className="main-form-text">Let Le Restauranteur make a hard choice easy and enter your city below.</h2>
 							<h5 className="main-form-text">Don't know where to go to eat tonight? We search an exhaustive list of the finest restaurants in your city and return a random restaurant for you. Don't like it? No big deal, you can search again! Love it? Great! Save it to your profile and you can remember it the next time you need somewhere to go.</h5>

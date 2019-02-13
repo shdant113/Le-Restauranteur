@@ -8,7 +8,7 @@ const Results = (props) => {
 	const getRestaurants = props.restaurants.results.map((restaurants, i) => {
 		if (i == randomIndex) {
 			return (
-				<li className="results-text" key={i} style={{listStyleType: "none"}}>
+				<li className="results-text" key={i}>
 					{restaurants.name}
 					<br />
 					{restaurants.formatted_address}
