@@ -96,18 +96,36 @@ class Main extends React.Component {
 			return err
 		}
 	}
-	saveRestaurant = (restaurant, e) => {
+	saveRestaurant = async (restaurant, e) => {
 		e.preventDefault()
 		console.log(restaurant.props.children[0] + ' is in saveRestaurant')
 		console.log(restaurant)
 		this.setState({
 			saved: [...this.state.saved, restaurant.props.children]
 		})
+		try {
+			const response = await fetch('http://localhost:9000/api/v1/restaurantsga/save', {
+				method: 'POST',
+				credentials: 'include',
+				body: JSON.stringify(this.state.saved),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+			console.log(response)
+		} catch (err) {
+			console.log(err)
+		}
 		// transfer info to back end to store in db under user
 			// set up in user model
 			// add route?
-		// reset saved state by calling on another function,
-	} 
+		// this.resetSave()
+	}
+	resetSave = () => {
+		this.setState({
+			saved: []
+		})
+	}
 	componentDidMount() {
 		this.getRestaurants();
 	}

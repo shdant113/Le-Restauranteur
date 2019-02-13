@@ -17,11 +17,12 @@ const Results = (props) => {
 			)
 		}
 	})
+	const randomRestaurant = getRestaurants[randomIndex];
 	return (
 		<div className={modalClass}>
 			<section className="modal-main">
 				<ul style={{padding: 0}}>
-					{getRestaurants}
+					{randomRestaurant}
 				</ul>
 				<button className="modal-button" onClick={props.hide}>Search Something Else</button>
 				<button className="modal-button" onClick={props.search}>Pick Another Restaurant</button>
