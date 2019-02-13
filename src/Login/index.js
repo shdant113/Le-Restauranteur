@@ -40,10 +40,15 @@ class Login extends Component {
 			// console.log(parsedResponse, ' login response parsed')
 			if (parsedResponse.data === 'login information is correct') {
 				console.log('login information is correct')
+				this.setState({
+					incorrectLogin: false
+				})
 				this.props.loginStatus()
 			} else {
 				this.setState({
-					incorrectLogin: true
+					incorrectLogin: true,
+					username: '',
+					password: ''
 				})
 			}
 		} catch (err) {
@@ -103,8 +108,7 @@ class Login extends Component {
 					</h1>
 				</div>
 				<div className={this.state.loginClass}>
-					{ this.state.incorrectLogin ? <h3>Incorrect login, please try again.</h3> : null }
-					<h2 className="login-first-h2">Already have an account? Log in below.</h2>
+					{ this.state.incorrectLogin ? <h2 className="login-first-h2">Incorrect login, please try again.</h2> : <h2 className="login-first-h2">Already have an account? Log in below.</h2> }
 					<form className="login-form" onSubmit={this.handleSubmit}>
 						<label>
 							Username:
