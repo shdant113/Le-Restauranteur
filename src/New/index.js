@@ -38,6 +38,7 @@ class New extends React.Component {
 							</label>
 							<br />
 							<input type='submit' />
+							<button onClick={this.props.returnToProfile}>Return to Profile</button>
 						</form>
 					</div>
 				</div>

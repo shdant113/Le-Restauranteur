@@ -44,12 +44,57 @@ class Profile extends React.Component {
 			[e.target.name]: e.target.value
 		})
 	}
-	editChoice = (e) => {
+	editChoice = (restaurant, e) => {
 		e.preventDefault()
 		this.setState({
 			showEdit: true,
-			profileWrap: "display-none"
+			profileWrap: "display-none",
+			editingRestaurant: {
+				name: restaurant.name,
+				formatted_address: restaurant.formatted_address,
+				_id: restaurant._id
+			}
 		})
+	}
+	updateRestaurant = async (e) => {
+		e.preventDefault()
+		console.log('entering try catch')
+		try {
+			console.log('entered try')
+			const updateRestaurant = await fetch('http://localhost:9000/api/v1/restaurantsga/' + this.state.editingRestaurant._id, {
+				method: 'PUT',
+				credentials: 'include',
+				body: JSON.stringify(this.state.editingRestaurant),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+			console.log(this.state.editingRestaurant.name)
+			console.log('fetch call happened')
+			if (!updateRestaurant.ok) {
+				throw Error(updateRestaurant.statusText)
+			}
+			const parsedResponse = await updateRestaurant.json();
+			const editedRestaurants = this.state.saved.map((restaurant) => {
+				if (restaurant._id === this.state.editingRestaurant._id) {
+					restaurant = parsedResponse;
+				}
+				return restaurant
+			})
+			this.setState({
+				restaurants: editedRestaurants,
+				showEdit: false,
+				profileWrap: "profile-wrap",
+				editingRestaurant: {
+					name: '',
+					formatted_address: '',
+					_id: null
+				}
+			})
+		} catch (err) {
+			console.log('there was an error')
+			return err
+		}
 	}
 	newEntry = async (e) => {
 		e.preventDefault()
@@ -87,6 +132,24 @@ class Profile extends React.Component {
 			return err
 		}
 	}
+	removeRestaurant = async (id, e) => {
+		e.preventDefault();
+		try {
+			const removeChosen = await fetch('http://localhost:9000/api/v1/restaurantsga/' + id, {
+				method: 'DELETE',
+				credentials: 'include'
+			})
+			const deleteParsedData = await removeChosen.json();
+			this.setState({
+				saved: this.state.saved.filter((restaurant) => {
+					return restaurant._id !== id
+				})
+			});
+		} catch (err) {
+			console.log('there was an error')
+			return err
+		}
+	}
 	returnToProfile = (e) => {
 		this.setState({
 			showNew: false,
@@ -95,20 +158,20 @@ class Profile extends React.Component {
 		})
 	}
 	render() {
-		console.log(this.state)
 		const mappedRestaurants = this.state.saved.map((restaurants, i) => {
 			return (
-				<li key={i}>
+				<li key={restaurants._id}>
 					{restaurants.name}
 					<br />
 					{restaurants.formatted_address}
 					<br />
-					<button onClick={this.editChoice}>Edit This Restaurant</button>
-					<button onClick={this.deleteChoice}>Remove From Your Saved List</button>
+					<button onClick={this.editChoice.bind(null, restaurants)}>Edit This Restaurant</button>
+					<button onClick={this.removeRestaurant.bind(null, restaurants._id)}>Remove From Your Saved List</button>
 					<hr />
 				</li>
 			)
 		})
+		console.log(this.state)
 		return (
 			<div>
 				<div className={this.state.profileWrap}>
@@ -119,10 +182,11 @@ class Profile extends React.Component {
 					</div>
 					<button onClick={this.props.closeProfile}>Back To Search</button>
 				</div>
-				{ this.state.showEdit ? <Edit returnToProfile={this.returnToProfile}
+				{ this.state.showEdit ? <Edit updateRestaurant={this.updateRestaurant}
 				onChange={this.onChange} editingRestaurant={this.state.editingRestaurant}
-				 /> : null }
+				returnToProfile={this.returnToProfile} /> : null }
 				{ this.state.showNew ? <New newRestaurant={this.newRestaurant} 
+				returnToProfile={this.returnToProfile}
 				/> : null }
 			</div>
 		)
