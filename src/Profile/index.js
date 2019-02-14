@@ -41,7 +41,10 @@ class Profile extends React.Component {
 	}
 	onChange = (e) => {
 		this.setState({
-			[e.target.name]: e.target.value
+			editingRestaurant: {
+				...this.state.editingRestaurant,
+				[e.currentTarget.name]: e.currentTarget.value
+			}
 		})
 	}
 	editChoice = (restaurant, e) => {
@@ -70,6 +73,7 @@ class Profile extends React.Component {
 				}
 			});
 			console.log(this.state.editingRestaurant.name)
+			console.log(this.state.editingRestaurant.formatted_address)	
 			console.log('fetch call happened')
 			if (!updateRestaurant.ok) {
 				throw Error(updateRestaurant.statusText)
@@ -178,7 +182,7 @@ class Profile extends React.Component {
 				<div className={this.state.profileWrap}>
 					<h1 className="user-profile-title">Your Saved Restaurants</h1>
 					<button onClick={this.newEntry}>Add a New Restaurant</button>
-					<br />
+					<hr />
 					<div className="saved-wrap">
 						<h3 className="user-profile-restaurants">{mappedRestaurants}</h3>
 					</div>

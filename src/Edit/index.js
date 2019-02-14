@@ -12,8 +12,9 @@ const Edit = (props) => {
 						<label>
 							Name:
 							<br />
-							<input type='text' name='name'
-							placeholder={props.editingRestaurant.name} 
+							<input type='text' name='name' 
+							value={props.editingRestaurant.name}
+							// placeholder={props.editingRestaurant.name} 
 							onChange={props.onChange} />
 						</label>
 						<br />
@@ -21,7 +22,8 @@ const Edit = (props) => {
 							Address:
 							<br />
 							<input type='text' name='formatted_address' 
-							placeholder={props.editingRestaurant.formatted_address}
+							value={props.editingRestaurant.formatted_address}
+							// placeholder={props.editingRestaurant.formatted_address}
 							onChange={props.onChange} />
 						</label>
 						<br />
