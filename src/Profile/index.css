@@ -19,3 +19,13 @@
 .display-none {
 	display: none;
 }
+
+.profile-button {
+	width: 150px;
+}
+
+.profile-form {
+	padding: 10px;
+	color: white;
+	font-weight: 700;
+}

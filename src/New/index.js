@@ -20,7 +20,7 @@ class New extends React.Component {
 				<div className="profile-wrap">
 				<h1 className="user-profile-title">Add A New Restaurant</h1>
 					<div className="saved-wrap">
-						<form onSubmit={this.props.newRestaurant.bind(null, this.state)}>
+						<form className="profile-form" onSubmit={this.props.newRestaurant.bind(null, this.state)}>
 							<label>
 								Name:
 								<br />
@@ -38,7 +38,8 @@ class New extends React.Component {
 							</label>
 							<br />
 							<input type='submit' />
-							<button onClick={this.props.returnToProfile}>Return to Profile</button>
+							<br />
+							<button className="profile-button" onClick={this.props.returnToProfile}>Return to Profile</button>
 						</form>
 					</div>
 				</div>

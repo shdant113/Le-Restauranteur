@@ -164,9 +164,10 @@ class Profile extends React.Component {
 					{restaurants.name}
 					<br />
 					{restaurants.formatted_address}
+					<br /><br />
+					<button className="profile-button" onClick={this.editChoice.bind(null, restaurants)}>Edit This Restaurant</button>
 					<br />
-					<button onClick={this.editChoice.bind(null, restaurants)}>Edit This Restaurant</button>
-					<button onClick={this.removeRestaurant.bind(null, restaurants._id)}>Remove From Your Saved List</button>
+					<button className="profile-button" onClick={this.removeRestaurant.bind(null, restaurants._id)}>Remove This Restaurant</button>
 					<hr />
 				</li>
 			)
@@ -177,6 +178,7 @@ class Profile extends React.Component {
 				<div className={this.state.profileWrap}>
 					<h1 className="user-profile-title">Your Saved Restaurants</h1>
 					<button onClick={this.newEntry}>Add a New Restaurant</button>
+					<br />
 					<div className="saved-wrap">
 						<h3 className="user-profile-restaurants">{mappedRestaurants}</h3>
 					</div>

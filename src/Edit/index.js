@@ -8,7 +8,7 @@ const Edit = (props) => {
 			<div className="profile-wrap">
 				<h1 className="user-profile-title">Edit Your Saved Restaurant</h1>
 				<div className="saved-wrap">
-					<form onSubmit={props.updateRestaurant}>
+					<form className="profile-form" onSubmit={props.updateRestaurant}>
 						<label>
 							Name:
 							<br />
@@ -26,7 +26,8 @@ const Edit = (props) => {
 						</label>
 						<br />
 						<input type='submit' />
-						<button onClick={props.returnToProfile}>Return to Profile</button>
+						<br />
+						<button className="profile-button" onClick={props.returnToProfile}>Return to Profile</button>
 					</form>
 				</div>
 			</div>
