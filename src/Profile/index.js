@@ -23,7 +23,7 @@ class Profile extends React.Component {
 	}
 	getSavedRestaurants = async () => {
 		try {
-			const response = await fetch(process.env.REACT_APP + '/api/v1/restaurantsga/getsaved', {
+			const response = await fetch(process.env.REACT_APP_URL + '/api/v1/restaurantsga/getsaved', {
 				method: 'GET',
 				credentials: 'include'
 			})
@@ -64,7 +64,7 @@ class Profile extends React.Component {
 		console.log('entering try catch')
 		try {
 			console.log('entered try')
-			const updateRestaurant = await fetch(process.env.REACT_APP + '/api/v1/restaurantsga/' + this.state.editingRestaurant._id, {
+			const updateRestaurant = await fetch(process.env.REACT_APP_URL + '/api/v1/restaurantsga/' + this.state.editingRestaurant._id, {
 				method: 'PUT',
 				credentials: 'include',
 				body: JSON.stringify(this.state.editingRestaurant),
@@ -110,7 +110,7 @@ class Profile extends React.Component {
 	newRestaurant = async (restaurant, e) => {
 		e.preventDefault()
 		try {
-			const createNewRestaurant = await fetch(process.env.REACT_APP + '/api/v1/restaurantsga/', {
+			const createNewRestaurant = await fetch(process.env.REACT_APP_URL + '/api/v1/restaurantsga/', {
 				method: 'POST',
 				credentials: 'include',
 				body: JSON.stringify(restaurant),
@@ -139,7 +139,7 @@ class Profile extends React.Component {
 	removeRestaurant = async (id, e) => {
 		e.preventDefault();
 		try {
-			const removeChosen = await fetch(process.env.REACT_APP + '/api/v1/restaurantsga/' + id, {
+			const removeChosen = await fetch(process.env.REACT_APP_URL + '/api/v1/restaurantsga/' + id, {
 				method: 'DELETE',
 				credentials: 'include'
 			})
