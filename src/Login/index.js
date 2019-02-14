@@ -15,6 +15,7 @@ class Login extends Component {
 			loginClass: null,
 			registrationClass: 'login-register-text'
 		}
+		console.log(process.env)
 	}
 	handleChange = (e) => {
 		this.setState({
@@ -24,7 +25,7 @@ class Login extends Component {
 	handleSubmit = async (e) => {
 		e.preventDefault()
 		try {
-			const loginResponse = await fetch(process.env.REACT_APP_PATH + '/api/v1/auth/login', {
+			const loginResponse = await fetch(process.env.REACT_APP_CLIENT_APP_URI + '/api/v1/auth/login', {
 				method: 'POST',
 				credentials: 'include',
 				body: JSON.stringify(this.state),
@@ -67,7 +68,7 @@ class Login extends Component {
 		console.log('here we are')
 		try {
 			console.log('are we getting here or not')
-			const registrationResponse = await fetch(process.env.REACT_APP_PATH + '/api/v1/auth/register', {
+			const registrationResponse = await fetch(process.env.REACT_APP_CLIENT_APP_URI + '/api/v1/auth/register', {
 				method: 'POST',
 				credentials: 'include',
 				body: JSON.stringify(state),
@@ -78,7 +79,7 @@ class Login extends Component {
 			console.log(registrationResponse)
 			if (!registrationResponse.ok) {
 				throw Error(registrationResponse.statusText)
-				console.log(registrationResponse.statusText)
+			 	console.log(registrationResponse.statusText)
 			}
 			const parsedResponse = await registrationResponse.json();
 			console.log(parsedResponse, ' registration response parsed')

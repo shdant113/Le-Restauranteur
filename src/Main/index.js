@@ -34,7 +34,7 @@ class Main extends React.Component {
 		e.preventDefault()
 		console.log(city)
 		try {
-			const sendCity = await fetch(process.env.REACT_APP_PATH + '/api/v1/restaurantsga/city', {
+			const sendCity = await fetch(process.env.REACT_APP_CLIENT_APP_URI + '/api/v1/restaurantsga/city', {
 				method: 'POST',
 				credentials: 'include',
 				body: JSON.stringify({
@@ -60,7 +60,7 @@ class Main extends React.Component {
 	pickAnother = async (e) => {
 		e.preventDefault()
 		try {
-			const sendCity = await fetch(process.env.REACT_APP_PATH + '/api/v1/restaurantsga/city', {
+			const sendCity = await fetch(process.env.REACT_APP_CLIENT_APP_URI + '/api/v1/restaurantsga/city', {
 				method: 'POST',
 				credentials: 'include',
 				body: JSON.stringify({
@@ -119,7 +119,7 @@ class Main extends React.Component {
 		// console.log(restaurant.props.children[0] + ' is in saveRestaurant')
 
 		try {
-			const response = await fetch(process.env.REACT_APP_PATH + '/api/v1/restaurantsga/save', {
+			const response = await fetch(process.env.REACT_APP_CLIENT_APP_URI + '/api/v1/restaurantsga/save', {
 				method: 'POST',
 				credentials: 'include',
 				body: JSON.stringify({

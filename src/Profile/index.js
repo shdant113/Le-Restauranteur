@@ -23,7 +23,7 @@ class Profile extends React.Component {
 	}
 	getSavedRestaurants = async () => {
 		try {
-			const response = await fetch(process.env.REACT_APP_PATH + '/api/v1/restaurantsga/getsaved', {
+			const response = await fetch(process.env.REACT_APP_CLIENT_APP_URI + '/api/v1/restaurantsga/getsaved', {
 				method: 'GET',
 				credentials: 'include'
 			})
@@ -64,7 +64,7 @@ class Profile extends React.Component {
 		console.log('entering try catch')
 		try {
 			console.log('entered try')
-			const updateRestaurant = await fetch(process.env.REACT_APP_PATH + '/api/v1/restaurantsga/' + this.state.editingRestaurant._id, {
+			const updateRestaurant = await fetch(process.env.REACT_APP_CLIENT_APP_URI + '/api/v1/restaurantsga/' + this.state.editingRestaurant._id, {
 				method: 'PUT',
 				credentials: 'include',
 				body: JSON.stringify(this.state.editingRestaurant),
@@ -79,14 +79,16 @@ class Profile extends React.Component {
 				throw Error(updateRestaurant.statusText)
 			}
 			const parsedResponse = await updateRestaurant.json();
+			console.log('\nthis is parsedResponse')
+			console.log(parsedResponse)
 			const editedRestaurants = this.state.saved.map((restaurant) => {
 				if (restaurant._id === this.state.editingRestaurant._id) {
-					restaurant = parsedResponse;
+					restaurant = parsedResponse.data;
 				}
 				return restaurant
 			})
 			this.setState({
-				restaurants: editedRestaurants,
+				saved: editedRestaurants,
 				showEdit: false,
 				profileWrap: "profile-wrap",
 				editingRestaurant: {
@@ -110,7 +112,7 @@ class Profile extends React.Component {
 	newRestaurant = async (restaurant, e) => {
 		e.preventDefault()
 		try {
-			const createNewRestaurant = await fetch(process.env.REACT_APP_PATH + '/api/v1/restaurantsga/', {
+			const createNewRestaurant = await fetch(process.env.REACT_APP_CLIENT_APP_URI + '/api/v1/restaurantsga/', {
 				method: 'POST',
 				credentials: 'include',
 				body: JSON.stringify(restaurant),
@@ -139,7 +141,7 @@ class Profile extends React.Component {
 	removeRestaurant = async (id, e) => {
 		e.preventDefault();
 		try {
-			const removeChosen = await fetch(process.env.REACT_APP_PATH + '/api/v1/restaurantsga/' + id, {
+			const removeChosen = await fetch(process.env.REACT_APP_CLIENT_APP_URI + '/api/v1/restaurantsga/' + id, {
 				method: 'DELETE',
 				credentials: 'include'
 			})
@@ -162,6 +164,7 @@ class Profile extends React.Component {
 		})
 	}
 	render() {
+		console.log(this.state)
 		const mappedRestaurants = this.state.saved.map((restaurants, i) => {
 			return (
 				<li key={restaurants._id}>
@@ -176,7 +179,7 @@ class Profile extends React.Component {
 				</li>
 			)
 		})
-		console.log(this.state)
+		
 		return (
 			<div>
 				<div className={this.state.profileWrap}>
