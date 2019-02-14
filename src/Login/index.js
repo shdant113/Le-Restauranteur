@@ -67,7 +67,7 @@ class Login extends Component {
 		console.log('here we are')
 		try {
 			console.log('are we getting here or not')
-			const registrationResponse = await fetch('/api/v1/auth/register', {
+			const registrationResponse = await fetch(process.env.REACT_APP + '/api/v1/auth/register', {
 				method: 'POST',
 				credentials: 'include',
 				body: JSON.stringify(state),
