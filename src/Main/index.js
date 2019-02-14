@@ -30,35 +30,31 @@ class Main extends React.Component {
 	handleLogout = () => {
 		this.props.handleLogout()
 	}
-	submitButton = async (city, e) => {
+	handleSubmit = async (city, e) => {
 		e.preventDefault()
-		// console.log(city)
+		console.log(city)
 		try {
-		// 	const response = await fetch('http://localhost:9000/api/v1/restaurantsga/city', {
-		// 		method: 'POST',
-		// 		mode: 'no-cors',
-		// 		credentials: 'include',
-		// 		body: JSON.stringify({
-		// 			city: city
-		// 		}),
-		// 		headers: {
-		// 			'Content-Type': 'application/json'
-		// 		}
-		// 	})
-		// 	console.log('we got past the response')
-		// 	console.log(response)
-		// 	console.log('we got past logging the response')
-		// 	if (!response.ok) {
-		// 		throw Error(response.statusText);
-		// 	}
-		// 	console.log('we beat the error')
-		// 	const parseResponse = await response.json();
-		// 	console.log('\n we parsed the response')
-		// 	console.log(parseResponse.data.results);
-		// 	// this.showListModal();
+			const sendCity = await fetch('http://localhost:9000/api/v1/restaurantsga/city', {
+				method: 'POST',
+				credentials: 'include',
+				body: JSON.stringify({
+					city: city				
+				}),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+			if (!sendCity.ok) {
+				throw Error(sendCity.statusText);
+			}
+			const getRestaurants = await sendCity.json()
+			this.setState({
+				restaurants: getRestaurants.data
+			})
+			this.showListModal()
 		} catch (err) {
+			console.log('\nthere was an error')
 			console.log(err)
-			return err
 		}
 	}
 	showListModal = () => {
@@ -93,26 +89,27 @@ class Main extends React.Component {
 			formClass: 'main-form'
 		})
 	}
-	getRestaurants = async () => {
-		try {
-			const response = await fetch('http://localhost:9000/api/v1/restaurantsga', {
-				method: 'GET',
-				credentials: 'include'
-			});
-			console.log(response)
-			if (!response.ok) {
-				throw Error(response.statusText);
-			}
-			const parseResponse = await response.json();
-			this.setState({
-				restaurants: parseResponse.data.results
-			});
-			console.log(parseResponse);
-		} catch (err) {
-			console.log(err)
-			return err
-		}
-	}
+	// getRestaurants = async () => {
+	// 	try {
+	// 		const response = await fetch('http://localhost:9000/api/v1/restaurantsga/city', {
+	// 			method: 'POST',
+	// 			credentials: 'include'
+	// 		});
+	// 		console.log(response)
+	// 		if (!response.ok) {
+	// 			throw Error(response.statusText);
+	// 		}
+	// 		const parseResponse = await response.json();
+	// 		this.setState({
+	// 			restaurants: parseResponse.data.results
+	// 		});
+	// 		console.log(parseResponse);
+	// 		this.showListModal();
+	// 	} catch (err) {
+	// 		console.log(err)
+	// 		return err
+	// 	}
+	// }
 	saveRestaurant = async (restaurant, e) => {
 		e.preventDefault()
 		// console.log(restaurant.props.children[0] + ' is in saveRestaurant')
@@ -152,7 +149,7 @@ class Main extends React.Component {
 	// 	this.getRestaurants();
 	// }
 	render() {
-		// console.log(this.state)
+		console.log(this.state)
 		console.log(this.state.saved + ' saved restaurant')
 		return (
 			<div>
@@ -170,10 +167,10 @@ class Main extends React.Component {
 							value={this.state.city}
 							onChange={this.handleChange} />
 							<br />
-							<button className="main-form-button" onClick={this.submitButton.bind(null, this.state.city)}>Search Your City</button>
+							<button className="main-form-button" onClick={this.handleSubmit.bind(null, this.state.city)}>Search Your City</button>
 						</form>
 					}
-					{this.state.show ? <Results show={this.state.show} hide={this.hideListModal} restaurants={this.state.restaurants} search={this.submitButton} saveRestaurant={this.saveRestaurant}/> : null }
+					{this.state.show ? <Results show={this.state.show} hide={this.hideListModal} restaurants={this.state.restaurants} search={this.handleSubmit} saveRestaurant={this.saveRestaurant}/> : null }
 				</div>
 			</div>
 		)
