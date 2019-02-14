@@ -48,10 +48,35 @@ class Main extends React.Component {
 				throw Error(sendCity.statusText);
 			}
 			const getRestaurants = await sendCity.json()
-			this.setState({
+			await this.setState({
 				restaurants: getRestaurants.data
 			})
 			this.showListModal()
+		} catch (err) {
+			console.log('\nthere was an error')
+			console.log(err)
+		}
+	}
+	pickAnother = async (e) => {
+		e.preventDefault()
+		try {
+			const sendCity = await fetch('http://localhost:9000/api/v1/restaurantsga/city', {
+				method: 'POST',
+				credentials: 'include',
+				body: JSON.stringify({
+					city: this.state.city				
+				}),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+			if (!sendCity.ok) {
+				throw Error(sendCity.statusText);
+			}
+			const getRestaurants = await sendCity.json()
+			await this.setState({
+				restaurants: getRestaurants.data
+			})
 		} catch (err) {
 			console.log('\nthere was an error')
 			console.log(err)
@@ -89,27 +114,6 @@ class Main extends React.Component {
 			formClass: 'main-form'
 		})
 	}
-	// getRestaurants = async () => {
-	// 	try {
-	// 		const response = await fetch('http://localhost:9000/api/v1/restaurantsga/city', {
-	// 			method: 'POST',
-	// 			credentials: 'include'
-	// 		});
-	// 		console.log(response)
-	// 		if (!response.ok) {
-	// 			throw Error(response.statusText);
-	// 		}
-	// 		const parseResponse = await response.json();
-	// 		this.setState({
-	// 			restaurants: parseResponse.data.results
-	// 		});
-	// 		console.log(parseResponse);
-	// 		this.showListModal();
-	// 	} catch (err) {
-	// 		console.log(err)
-	// 		return err
-	// 	}
-	// }
 	saveRestaurant = async (restaurant, e) => {
 		e.preventDefault()
 		// console.log(restaurant.props.children[0] + ' is in saveRestaurant')
@@ -170,7 +174,7 @@ class Main extends React.Component {
 							<button className="main-form-button" onClick={this.handleSubmit.bind(null, this.state.city)}>Search Your City</button>
 						</form>
 					}
-					{this.state.show ? <Results show={this.state.show} hide={this.hideListModal} restaurants={this.state.restaurants} search={this.handleSubmit} saveRestaurant={this.saveRestaurant}/> : null }
+					{this.state.show ? <Results show={this.state.show} hide={this.hideListModal} restaurants={this.state.restaurants} pickAnother={this.pickAnother} saveRestaurant={this.saveRestaurant}/> : null }
 				</div>
 			</div>
 		)
