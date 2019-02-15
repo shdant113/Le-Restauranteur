@@ -2,7 +2,10 @@ import React from 'react';
 import '../Main/index.css';
 
 const Results = (props) => {
+	// set class depending on the "show" state of the main component
 	const modalClass = props.show ? "main-form" : "main-form display-none"
+	// randomly select an index out of the returned restaurants so that one is displayed
+	// at random
 	const randomIndex = parseInt(Math.random() * props.restaurants.results.length)
 	const randomRestaurant = props.restaurants.results[randomIndex]
 	const restaurant = (
