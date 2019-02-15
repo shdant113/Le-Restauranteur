@@ -16,10 +16,10 @@ In addition to this search feature, users can also use Le Restauranteur to save 
 
 #### Possible Features to be Added:
 
-* An embedded Google map display within the search window that places a pin at the location of the restaurant and allows the user to visualize where in their town that restaurant is located without searching it independently.
-* The ability to search restaurants by name instead of place.
-* Return websites and/or menus with searches.
-* Geolocation to offer a random selection of restaurants in the town the user is currently in.
+1. An embedded Google map display within the search window that places a pin at the location of the restaurant and allows the user to visualize where in their town that restaurant is located without searching it independently.
+2. The ability to search restaurants by name instead of place.
+3. Return websites and/or menus with searches.
+4. Geolocation to offer a random selection of restaurants in the town the user is currently in.
 
 ---
 
