@@ -8,6 +8,8 @@
 
 #### Overview
 
+Because "where do you want to go to eat?" and "I don't know" go together like peanut butter and jelly.
+
 Le Restauranteur is an app built with React that fetches data from a server-side API, which itself retrieves its data from Google Places. The purpose of building this app was to make a problem that often gets more complicated than it should be much, much simpler: where to go to eat. With Le Restauranteur, users can register an account and search their city or town, no matter how big or small. When they do so, the app will communicate with its server-side API and return a large selection of the best establishments in town. The app then randomizes the returned selection and presents the user with the random restaurant. If the user likes the restaurant, they can save it to their profile, where they can access it again in the future if they want to go back there. If the user does not like the choice offered, they can simply run the search again by clicking "pick another restaurant" and they will be presented with another random choice.
 
 For the best results, some users might find it useful to input their city and state in the search bar instead of just their city. For example, a user searching "Bloomington" for options in Bloomington, IL will find that the search returns restaurants from Bloomington, IN. However, searching "Bloomington Illinois" will present them with the options they are looking for.
