@@ -1,11 +1,14 @@
-.user-profile-title, .user-profile-restaurants {
+.user-profile-title, .user-profile-restaurants, .profile-form {
 	color: white;
+}
+
+.profile-wrap, .profile-form {
+	padding: 10px;
 }
 
 .profile-wrap {
 	width: 60%;
 	margin: 0 auto;
-	padding: 10px;
 	background-color: rgba(0, 0, 0, 0.6);
 	border-radius: 50px;
 }
@@ -16,16 +19,10 @@
 	margin: 10px 0;
 }
 
-.display-none {
-	display: none;
-}
-
 .profile-button {
 	width: 150px;
 }
 
 .profile-form {
-	padding: 10px;
-	color: white;
 	font-weight: 700;
 }

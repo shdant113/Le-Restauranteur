@@ -31,3 +31,7 @@ ul {
 button, input[type="submit"], a {
   cursor: pointer;
 }
+
+.display-none {
+  display: none;
+}

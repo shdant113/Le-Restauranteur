@@ -1,7 +1,6 @@
 import React from 'react';
 import '../Profile/index.css';
 
-
 const Edit = (props) => {
 	return (
 		<div>
@@ -14,7 +13,6 @@ const Edit = (props) => {
 							<br />
 							<input type='text' name='name' 
 							value={props.editingRestaurant.name}
-							// placeholder={props.editingRestaurant.name} 
 							onChange={props.onChange} />
 						</label>
 						<br />
@@ -23,7 +21,6 @@ const Edit = (props) => {
 							<br />
 							<input type='text' name='formatted_address' 
 							value={props.editingRestaurant.formatted_address}
-							// placeholder={props.editingRestaurant.formatted_address}
 							onChange={props.onChange} />
 						</label>
 						<br />
@@ -36,23 +33,5 @@ const Edit = (props) => {
 		</div>
 	)
 }
-// class Edit extends React.Component {
-// 	constructor() {
-// 		super();
-// 		this.state = {
-// 			name: '',
-// 			formatted_address: ''
-// 		}
-// 	} 
-// 	onChange = (e) => {
-// 		this.setState({
-// 			[e.target.name]: e.target.value
-// 		})
-// 	}
-// 	render() {
-// 		console.log(this.state)
-		
-// 	}
-// }
 
 export default Edit;
