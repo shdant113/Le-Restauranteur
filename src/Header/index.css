@@ -20,7 +20,6 @@
 	font-family: 'Ramaraja', serif;
 	font-weight: 800;
 	font-size: 70px;
-	text-shadow: 5px 5px 5px white;
 	color: navy;
 }
 
@@ -31,11 +30,7 @@
 	cursor: pointer;
 }
 
-a:hover {
-	text-shadow: 5px 5px 5px white;
-}
-
-.nav-bar:hover {
+.header-h1, a:hover, .nav-bar:hover {
 	text-shadow: 5px 5px 5px white;
 }
 
