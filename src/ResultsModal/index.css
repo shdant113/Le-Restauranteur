@@ -1,41 +1,8 @@
-.results-modal {
-	/*position: fixed;*/
-	display: block;
-	top: 0;
-	left: 0;
-	height: 50%;
-	background: rgba(0, 0, 0, 0.6);
-}
-
-.results-modal-main {
-	/* to style later */
-	position: fixed;
-	background: rgba(0, 0, 0, 0.6);
-	border: 3px solid black;
-	border-radius: 20px;
-	padding: 10px;
-	width: 70%;
-	left: 50%;
-	top: 50%;
-	/*width: max-content;*/
-	/*height: auto;*/
-	/*max-height: 50%;*/
-	/*overflow: scroll;*/
-	transform: translate(-50%,-50%);
-}
-
-.display-none {
-	display: none;
-}
-
-.results-text {
-	text-shadow: none;
-	color: white;
+.results-text, .results-modal-button {
 	font-weight: 700;
 }
 
 .results-modal-button {
 	color: navy;
-	font-weight: 700;
 	margin: 10px;
 }

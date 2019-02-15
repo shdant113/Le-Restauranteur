@@ -21,8 +21,10 @@ class Profile extends React.Component {
 	componentDidMount() {
 		this.getSavedRestaurants()
 	}
+	// to access user's collection of saved restaurants
 	getSavedRestaurants = async () => {
 		try {
+			// getting data from database
 			const response = await fetch(process.env.REACT_APP_CLIENT_APP_URI + '/api/v1/restaurantsga/getsaved', {
 				method: 'GET',
 				credentials: 'include'
@@ -30,6 +32,7 @@ class Profile extends React.Component {
 			if (!response.ok) {
 				throw Error(response.statusText)
 			}
+			// response from database
 			const parsedResponse = await response.json();
 			this.setState({
 				saved: parsedResponse.data
@@ -39,6 +42,7 @@ class Profile extends React.Component {
 			return err
 		}
 	}
+	// when the user changes the values of the restaurant they are editing
 	onChange = (e) => {
 		this.setState({
 			editingRestaurant: {
@@ -47,6 +51,8 @@ class Profile extends React.Component {
 			}
 		})
 	}
+	// grabbing the restaurant that the user chooses to edit displays the edit form
+	// and hides the profile page
 	editChoice = (restaurant, e) => {
 		e.preventDefault()
 		this.setState({
@@ -59,11 +65,11 @@ class Profile extends React.Component {
 			}
 		})
 	}
+	// updating the restaurant based on the new data the user inputs
 	updateRestaurant = async (e) => {
 		e.preventDefault()
-		console.log('entering try catch')
 		try {
-			console.log('entered try')
+			// sending new information to the database
 			const updateRestaurant = await fetch(process.env.REACT_APP_CLIENT_APP_URI + '/api/v1/restaurantsga/' + this.state.editingRestaurant._id, {
 				method: 'PUT',
 				credentials: 'include',
@@ -72,21 +78,21 @@ class Profile extends React.Component {
 					'Content-Type': 'application/json'
 				}
 			});
-			console.log(this.state.editingRestaurant.name)
-			console.log(this.state.editingRestaurant.formatted_address)	
-			console.log('fetch call happened')
 			if (!updateRestaurant.ok) {
 				throw Error(updateRestaurant.statusText)
 			}
+			// response from database
 			const parsedResponse = await updateRestaurant.json();
-			console.log('\nthis is parsedResponse')
-			console.log(parsedResponse)
+			// mapping over the array of saved restaurants
+			// when the edited restaurant id is found, the old data will be replaced
+			// with the new data and state updated to match
 			const editedRestaurants = this.state.saved.map((restaurant) => {
 				if (restaurant._id === this.state.editingRestaurant._id) {
 					restaurant = parsedResponse.data;
 				}
 				return restaurant
 			})
+			// state updates with new data, edit form is hidden and profile rendered
 			this.setState({
 				saved: editedRestaurants,
 				showEdit: false,
@@ -102,6 +108,8 @@ class Profile extends React.Component {
 			return err
 		}
 	}
+	// when the user chooses to add a new restaurant to their saved collection manually
+	// the profile will be hidden and the new form appears
 	newEntry = async (e) => {
 		e.preventDefault()
 		this.setState({
@@ -112,6 +120,7 @@ class Profile extends React.Component {
 	newRestaurant = async (restaurant, e) => {
 		e.preventDefault()
 		try {
+			// posting inputted form data to the database
 			const createNewRestaurant = await fetch(process.env.REACT_APP_CLIENT_APP_URI + '/api/v1/restaurantsga/', {
 				method: 'POST',
 				credentials: 'include',
@@ -120,32 +129,35 @@ class Profile extends React.Component {
 					'Content-Type': 'application/json'
 				}
 			})
-			console.log('call done')
 			if (!createNewRestaurant.ok) {
 				throw Error(createNewRestaurant.statusText)
 			}
-			console.log('no thrown error')
+			// response from database
 			const parsedResponse = await createNewRestaurant.json();
-			console.log('response parsed')
+			// adding new restaurant to existing collection and hiding the form
 			this.setState({
 				saved: [...this.state.saved, parsedResponse.data],
 				showNew: false,
 				profileWrap: "profile-wrap"
 			})
-			console.log('state reset')
 		} catch (err) {
 			console.log('there was an error')
 			return err
 		}
 	}
+	// removing a restaurant from the saved collection
+	// does not remove it from the API, only their collection
 	removeRestaurant = async (id, e) => {
 		e.preventDefault();
 		try {
+			// sending a delete request to the database
 			const removeChosen = await fetch(process.env.REACT_APP_CLIENT_APP_URI + '/api/v1/restaurantsga/' + id, {
 				method: 'DELETE',
 				credentials: 'include'
 			})
+			// response from database
 			const deleteParsedData = await removeChosen.json();
+			// filtering out restaurant that matches the id of the one chosen to delete
 			this.setState({
 				saved: this.state.saved.filter((restaurant) => {
 					return restaurant._id !== id
@@ -156,6 +168,8 @@ class Profile extends React.Component {
 			return err
 		}
 	}
+	// if the user wants to leave the edit or new restaurant form, they can press
+	// the "return to profile" button and exit the form
 	returnToProfile = (e) => {
 		this.setState({
 			showNew: false,
@@ -164,7 +178,6 @@ class Profile extends React.Component {
 		})
 	}
 	render() {
-		console.log(this.state)
 		const mappedRestaurants = this.state.saved.map((restaurants, i) => {
 			return (
 				<li key={restaurants._id}>
@@ -179,7 +192,6 @@ class Profile extends React.Component {
 				</li>
 			)
 		})
-		
 		return (
 			<div>
 				<div className={this.state.profileWrap}>

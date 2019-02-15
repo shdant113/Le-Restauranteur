@@ -71,7 +71,7 @@ class Login extends Component {
 	}
 	// when the user has submitted their registration information, the onSubmit function
 	// passes the responsibility of registering the user to this function
-	registrationHandler = async (state) => {
+	handleRegistration = async (state) => {
 		try {
 			// posting user registration data to the database for authentication
 			const registrationResponse = await fetch(process.env.REACT_APP_CLIENT_APP_URI + '/api/v1/auth/register', {
@@ -137,7 +137,7 @@ class Login extends Component {
 				<div className={this.state.registrationClass}>
 					{ !this.state.showRegistration ? <h2>Don't have an account? Click <a className="login-a" onClick={this.registrationOpen}>here</a>.</h2> :
 					<h2>Register your account below.</h2> }
-					{ this.state.showRegistration ? <Register registrationHandler={this.registrationHandler} showRegistration={this.state.showRegistration} /> : null}
+					{ this.state.showRegistration ? <Register handleRegistration={this.handleRegistration} showRegistration={this.state.showRegistration} /> : null}
 				</div>
 			</div>
 		)

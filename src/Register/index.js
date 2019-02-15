@@ -14,9 +14,11 @@ class Register extends React.Component {
 			[e.target.name]: e.target.value
 		});
 	}
+	// when the user submits their information, it is passed off to the
+	// handleRegistration function in the login 
 	onSubmit = (e) => {
 		e.preventDefault()
-		this.props.registrationHandler(this.state);
+		this.props.handleRegistration(this.state);
 	} 
 	render() {
 		return (
@@ -45,6 +47,5 @@ class Register extends React.Component {
 		)
 	}
 }
-
 
 export default Register;
