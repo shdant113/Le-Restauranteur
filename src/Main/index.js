@@ -22,18 +22,21 @@ class Main extends React.Component {
 			formClass: 'main-form'
 		}
 	} 
+	// when the user types in the search field
 	handleChange = (e) => {
 		this.setState({
 			city: e.currentTarget.value
 		})
 	}
+	// logs the user out of the site
 	handleLogout = () => {
 		this.props.handleLogout()
 	}
+	// when the user presses the submit button in the search field
 	handleSubmit = async (city, e) => {
 		e.preventDefault()
-		console.log(city)
 		try {
+			// posting to the API with the search field content
 			const sendCity = await fetch(process.env.REACT_APP_CLIENT_APP_URI + '/api/v1/restaurantsga/city', {
 				method: 'POST',
 				credentials: 'include',
@@ -47,19 +50,24 @@ class Main extends React.Component {
 			if (!sendCity.ok) {
 				throw Error(sendCity.statusText);
 			}
+			// response from API
 			const getRestaurants = await sendCity.json()
+			// set new data in state (to be randomized and shown in the results modal)
 			await this.setState({
 				restaurants: getRestaurants.data
 			})
+			// open the results modal
 			this.showListModal()
 		} catch (err) {
 			console.log('\nthere was an error')
 			console.log(err)
 		}
 	}
+	// when the user presses "pick another restaurant" in the results modal
 	pickAnother = async (e) => {
 		e.preventDefault()
 		try {
+			// repeat handleSubmit process --> post to API with the content from search field
 			const sendCity = await fetch(process.env.REACT_APP_CLIENT_APP_URI + '/api/v1/restaurantsga/city', {
 				method: 'POST',
 				credentials: 'include',
@@ -73,6 +81,7 @@ class Main extends React.Component {
 			if (!sendCity.ok) {
 				throw Error(sendCity.statusText);
 			}
+			// response from API
 			const getRestaurants = await sendCity.json()
 			await this.setState({
 				restaurants: getRestaurants.data
@@ -82,6 +91,8 @@ class Main extends React.Component {
 			console.log(err)
 		}
 	}
+	// when the user's request to the API is returned, the results are displayed in
+	// a modal and the search bar is hidden to prevent overlap
 	showListModal = () => {
 		this.setState({
 			show: true,
@@ -94,6 +105,7 @@ class Main extends React.Component {
 			formClass: 'main-form'
 		})
 	}
+	// when the user visits their profile, the search bar is hidden and profile is shown
 	goToProfile = () => {
 		this.setState({
 			profile: true,
@@ -107,6 +119,7 @@ class Main extends React.Component {
 			formClass: 'main-form'
 		})
 	}
+	// when the user clicks the home button, they are returned to the search field
 	goToMain = () => {
 		this.setState({
 			profile: false,
@@ -114,11 +127,12 @@ class Main extends React.Component {
 			formClass: 'main-form'
 		})
 	}
+	// user can save a restaurant to their profile to return to it later
 	saveRestaurant = async (restaurant, e) => {
 		e.preventDefault()
-		// console.log(restaurant.props.children[0] + ' is in saveRestaurant')
-
 		try {
+			// posting information of saved restaurant to database, which will save
+			// the information in the user's collection of saved restaurants
 			const response = await fetch(process.env.REACT_APP_CLIENT_APP_URI + '/api/v1/restaurantsga/save', {
 				method: 'POST',
 				credentials: 'include',
@@ -130,31 +144,21 @@ class Main extends React.Component {
 					'Content-Type': 'application/json'
 				}
 			})
-			// console.log(response)
 			if (!response.ok) {
 				throw Error(response.statusText);
 			}
-			// const parseResponse = await response.json();
-			// console.log('parseResponse is ' + parseResponse)	
 		} catch (err) {
 			console.log(err)
 		}
-		// transfer info to back end to store in db under user
-			// set up in user model
-			// add route?
-		// this.resetSave()
 	}
+	// yet to be added --> allows user to clear their saved restaurants
+	// will require API call
 	resetSave = () => {
 		this.setState({
 			saved: []
 		})
 	}
-	// componentDidMount() {
-	// 	this.getRestaurants();
-	// }
 	render() {
-		console.log(this.state)
-		console.log(this.state.saved + ' saved restaurant')
 		return (
 			<div>
 				<div>

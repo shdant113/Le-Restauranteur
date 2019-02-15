@@ -44,7 +44,7 @@ class Login extends Component {
 				this.setState({
 					incorrectLogin: false
 				})
-				this.props.loginStatus()
+				this.props.handleLogin()
 			// if the login information (username/password) is incorrect, there will be
 			// an incorrect login message displayed and the form holding the inputted
 			// username and password will be cleared
@@ -99,7 +99,7 @@ class Login extends Component {
 					registrationClass: 'login-register-text'
 				})
 			}
-			this.props.loginStatus()
+			this.props.handleLogin()
 		} catch (err) {
 			console.log(err)
 			return err
