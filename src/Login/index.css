@@ -4,18 +4,20 @@
 	border-radius: 50px;
 }
 
+.login-form, .login-register-text, .login-register-adjust, .login-a, .login-first-h2 {
+	color: white;
+}
+
+.login-form, .login-register-text, .login-register-adjust, .login-first-h2 {
+	font-weight: 700;
+}
+
 .login-form, .login-register-text, .login-register-adjust {
 	padding: 10px;
-	color: white;
-	font-weight: 700;
 }
 
 .login-register-adjust {
 	margin-top: -75px;
-}
-
-.login-a {
-	color: white;
 }
 
 .header-h1-login {
@@ -28,8 +30,6 @@
 
 .login-first-h2 {
 	margin-top: -50px;
-	color: white;
-	font-weight: 700;
 }
 
 input {

@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import Register from '../Register';
 import './index.css'
 
-// const loginClass = this.state.showRegistration ? "display-none" : null
-
 class Login extends Component {
 	constructor() {
 		super();
@@ -15,16 +13,18 @@ class Login extends Component {
 			loginClass: null,
 			registrationClass: 'login-register-text'
 		}
-		console.log(process.env)
 	}
+	// when the user types in the login form
 	handleChange = (e) => {
 		this.setState({
 			[e.target.name]: e.target.value
 		});
 	}
+	// when the user presses "submit" on log in form
 	handleSubmit = async (e) => {
 		e.preventDefault()
 		try {
+			// posting to user database to authenticate login
 			const loginResponse = await fetch(process.env.REACT_APP_CLIENT_APP_URI + '/api/v1/auth/login', {
 				method: 'POST',
 				credentials: 'include',
@@ -36,15 +36,18 @@ class Login extends Component {
 			if (!loginResponse.ok) {
 				throw Error(loginResponse.statusText)
 			}
-			// console.log(loginResponse)
+			// response from database
 			const parsedResponse = await loginResponse.json();
-			// console.log(parsedResponse, ' login response parsed')
+			// if the login information (username/password) is correct, there will be
+			// no incorrect login message displayed and the user is logged in successfully
 			if (parsedResponse.data === 'login information is correct') {
-				console.log('login information is correct')
 				this.setState({
 					incorrectLogin: false
 				})
 				this.props.loginStatus()
+			// if the login information (username/password) is incorrect, there will be
+			// an incorrect login message displayed and the form holding the inputted
+			// username and password will be cleared
 			} else {
 				this.setState({
 					incorrectLogin: true,
@@ -57,6 +60,8 @@ class Login extends Component {
 			return err
 		}
 	}
+	// when the registration page is opened, the registration modal appears and the
+	// login form disappears from the page
 	registrationOpen = () => {
 		this.setState({
 			showRegistration: true,
@@ -64,10 +69,11 @@ class Login extends Component {
 			registrationClass: 'login-register-adjust'
 		})
 	}
+	// when the user has submitted their registration information, the onSubmit function
+	// passes the responsibility of registering the user to this function
 	registrationHandler = async (state) => {
-		console.log('here we are')
 		try {
-			console.log('are we getting here or not')
+			// posting user registration data to the database for authentication
 			const registrationResponse = await fetch(process.env.REACT_APP_CLIENT_APP_URI + '/api/v1/auth/register', {
 				method: 'POST',
 				credentials: 'include',
@@ -76,13 +82,14 @@ class Login extends Component {
 					'Content-Type': 'application/json'
 				}
 			})
-			console.log(registrationResponse)
 			if (!registrationResponse.ok) {
 				throw Error(registrationResponse.statusText)
-			 	console.log(registrationResponse.statusText)
 			}
+			// response from database
 			const parsedResponse = await registrationResponse.json();
-			console.log(parsedResponse, ' registration response parsed')
+			// if the username from the database matches the one they inputted into the form
+			// then they will be pushed through the login process as a newly registered
+			// user does not need to log in
 			if (parsedResponse.data.user.username === state.username) {
 				this.setState({
 					username: state.username,
@@ -94,13 +101,11 @@ class Login extends Component {
 			}
 			this.props.loginStatus()
 		} catch (err) {
-			console.log('straight to error')
 			console.log(err)
 			return err
 		}
 	}
 	render() {
-		console.log(this.state)
 		return (
 			<div className="login-wrap">
 				<div>

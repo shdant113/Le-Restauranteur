@@ -21,8 +21,6 @@ class App extends Component {
 		this.setState({
 			loggedIn: false
 		})
-		// set loggedIn to false
-		// redirect to login/home screen
 	}
 	render() {
 		return (
